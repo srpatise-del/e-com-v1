@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import api from "../services/api";
 
 const emptyProduct = {
@@ -14,6 +14,10 @@ const emptyProduct = {
   images: ""
 };
 
+const orderStatusOptions = ["pending", "paid", "processing", "shipped", "completed", "cancelled"];
+const paymentStatusOptions = ["pending", "awaiting_review", "paid", "failed", "cod"];
+const assetBaseUrl = (import.meta.env.VITE_API_URL || "https://e-com-v1-bvn8.onrender.com/api").replace(/\/api\/?$/, "");
+
 export default function AdminDashboard() {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -21,6 +25,7 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("products");
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState(emptyProduct);
+  const [savingOrderId, setSavingOrderId] = useState(null);
 
   const loadDashboard = async () => {
     const [productRes, orderRes, userRes] = await Promise.all([
@@ -40,6 +45,7 @@ export default function AdminDashboard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const payload = {
       name: form.name,
       brand: form.brand,
@@ -88,9 +94,29 @@ export default function AdminDashboard() {
     await loadDashboard();
   };
 
+  const handleOrderFieldChange = (orderId, field, value) => {
+    setOrders((currentOrders) =>
+      currentOrders.map((order) => (order._id === orderId ? { ...order, [field]: value } : order))
+    );
+  };
+
+  const handleOrderUpdate = async (order) => {
+    setSavingOrderId(order._id);
+
+    try {
+      await api.put(`/orders/${order._id}`, {
+        status: order.status,
+        paymentStatus: order.paymentStatus
+      });
+      await loadDashboard();
+    } finally {
+      setSavingOrderId(null);
+    }
+  };
+
   const tabs = [
     { id: "products", label: "จัดการสินค้า" },
-    { id: "orders", label: "จัดการออร์เดอร์" },
+    { id: "orders", label: "จัดการออเดอร์" },
     { id: "users", label: "จัดการผู้ใช้" }
   ];
 
@@ -98,7 +124,7 @@ export default function AdminDashboard() {
     <div className="container-app py-10">
       <div className="mb-8">
         <h1 className="section-title">แผงควบคุมแอดมิน</h1>
-        <p className="section-subtitle">จัดการสินค้า ผู้ใช้ และคำสั่งซื้อจากหน้าจอเดียว</p>
+        <p className="section-subtitle">จัดการสินค้า ผู้ใช้ และคำสั่งซื้อจากหน้าเดียว</p>
       </div>
 
       <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
@@ -211,18 +237,47 @@ export default function AdminDashboard() {
                 {orders.map((order) => (
                   <div key={order._id} className="rounded-2xl border border-white/10 p-4">
                     <div className="flex flex-wrap items-center justify-between gap-3">
-                      <p className="font-medium text-white">ออร์เดอร์ #{order._id.slice(-6).toUpperCase()}</p>
+                      <p className="font-medium text-white">ออเดอร์ #{order._id.slice(-6).toUpperCase()}</p>
                       <span className="rounded-full bg-brand-500/15 px-3 py-1 text-xs text-brand-100">{order.status}</span>
                     </div>
                     <p className="mt-2 text-sm text-slate-400">ลูกค้า: {order.userId?.name || "-"}</p>
                     <p className="mt-2 text-sm text-slate-400">วิธีชำระ: {order.paymentMethod}</p>
-                    <p className="mt-2 text-sm text-slate-400">สถานะชำระเงิน: {order.paymentStatus || "pending"}</p>
+                    <div className="mt-4 grid gap-3 md:grid-cols-2">
+                      <label className="text-sm text-slate-300">
+                        <span className="mb-2 block">สถานะคำสั่งซื้อ</span>
+                        <select
+                          className="input-field"
+                          value={order.status}
+                          onChange={(e) => handleOrderFieldChange(order._id, "status", e.target.value)}
+                        >
+                          {orderStatusOptions.map((status) => (
+                            <option key={status} value={status}>
+                              {status}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label className="text-sm text-slate-300">
+                        <span className="mb-2 block">สถานะการชำระเงิน</span>
+                        <select
+                          className="input-field"
+                          value={order.paymentStatus || "pending"}
+                          onChange={(e) => handleOrderFieldChange(order._id, "paymentStatus", e.target.value)}
+                        >
+                          {paymentStatusOptions.map((status) => (
+                            <option key={status} value={status}>
+                              {status}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    </div>
                     {order.paymentDetails?.transactionId && (
                       <p className="mt-2 text-sm text-slate-500">เลขอ้างอิง: {order.paymentDetails.transactionId}</p>
                     )}
                     {order.paymentDetails?.slipUrl && (
                       <a
-                        href={`https://e-com-v1-bvn8.onrender.com${order.paymentDetails.slipUrl}`}
+                        href={`${assetBaseUrl}${order.paymentDetails.slipUrl}`}
                         target="_blank"
                         rel="noreferrer"
                         className="mt-2 inline-block text-sm text-brand-200 underline"
@@ -231,6 +286,14 @@ export default function AdminDashboard() {
                       </a>
                     )}
                     <p className="mt-2 text-sm text-slate-400">ยอดรวม: ฿{order.totalPrice.toLocaleString()}</p>
+                    <button
+                      type="button"
+                      className="btn-primary mt-4"
+                      disabled={savingOrderId === order._id}
+                      onClick={() => handleOrderUpdate(order)}
+                    >
+                      {savingOrderId === order._id ? "กำลังบันทึก..." : "บันทึกสถานะ"}
+                    </button>
                   </div>
                 ))}
               </div>
