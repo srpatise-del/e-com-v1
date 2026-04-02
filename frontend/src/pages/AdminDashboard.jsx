@@ -114,6 +114,22 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleOrderDelete = async (orderId) => {
+    const confirmed = window.confirm("ต้องการลบคำสั่งซื้อนี้ใช่หรือไม่?");
+    if (!confirmed) {
+      return;
+    }
+
+    setSavingOrderId(orderId);
+
+    try {
+      await api.delete(`/orders/${orderId}`);
+      await loadDashboard();
+    } finally {
+      setSavingOrderId(null);
+    }
+  };
+
   const tabs = [
     { id: "products", label: "จัดการสินค้า" },
     { id: "orders", label: "จัดการออเดอร์" },
@@ -286,14 +302,24 @@ export default function AdminDashboard() {
                       </a>
                     )}
                     <p className="mt-2 text-sm text-slate-400">ยอดรวม: ฿{order.totalPrice.toLocaleString()}</p>
-                    <button
-                      type="button"
-                      className="btn-primary mt-4"
-                      disabled={savingOrderId === order._id}
-                      onClick={() => handleOrderUpdate(order)}
-                    >
-                      {savingOrderId === order._id ? "กำลังบันทึก..." : "บันทึกสถานะ"}
-                    </button>
+                    <div className="mt-4 flex flex-wrap gap-3">
+                      <button
+                        type="button"
+                        className="btn-primary"
+                        disabled={savingOrderId === order._id}
+                        onClick={() => handleOrderUpdate(order)}
+                      >
+                        {savingOrderId === order._id ? "กำลังบันทึก..." : "บันทึกสถานะ"}
+                      </button>
+                      <button
+                        type="button"
+                        className="rounded-full border border-rose-400/40 px-5 py-2 text-sm font-medium text-rose-200 transition hover:bg-rose-500/10 disabled:cursor-not-allowed disabled:opacity-60"
+                        disabled={savingOrderId === order._id}
+                        onClick={() => handleOrderDelete(order._id)}
+                      >
+                        ลบคำสั่งซื้อ
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
