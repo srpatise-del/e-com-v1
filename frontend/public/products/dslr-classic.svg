@@ -1,0 +1,13 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#0B0D14"/>
+  <rect x="120" y="255" width="960" height="435" rx="46" fill="#161A24" stroke="#64748B" stroke-width="8"/>
+  <path d="M230 255C270 182 329 160 420 160H510C605 160 665 190 715 255H230Z" fill="#1F2533"/>
+  <circle cx="615" cy="470" r="184" fill="#202839" stroke="#CBD5E1" stroke-width="16"/>
+  <circle cx="615" cy="470" r="118" fill="#090C12" stroke="#E2E8F0" stroke-width="10"/>
+  <circle cx="615" cy="470" r="54" fill="#94A3B8" fill-opacity="0.45"/>
+  <rect x="210" y="328" width="118" height="28" rx="14" fill="#2C364A"/>
+  <rect x="845" y="300" width="148" height="24" rx="12" fill="#2C364A"/>
+  <rect x="845" y="343" width="108" height="24" rx="12" fill="#2C364A"/>
+  <text x="122" y="802" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="58" font-weight="700">CLASSIC DSLR</text>
+  <text x="122" y="848" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="28">Deep grip / long battery / optical feel</text>
+</svg>

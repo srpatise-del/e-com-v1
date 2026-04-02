@@ -1,0 +1,12 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#09101D"/>
+  <rect x="120" y="180" width="960" height="540" rx="48" fill="#101B2E" stroke="#29476D" stroke-width="8"/>
+  <rect x="220" y="140" width="160" height="80" rx="24" fill="#162845"/>
+  <circle cx="610" cy="450" r="170" fill="#182A45" stroke="#4A93FF" stroke-width="14"/>
+  <circle cx="610" cy="450" r="104" fill="#0E1525" stroke="#89B8FF" stroke-width="10"/>
+  <circle cx="610" cy="450" r="44" fill="#4A93FF" fill-opacity="0.55"/>
+  <rect x="850" y="260" width="130" height="22" rx="11" fill="#233958"/>
+  <rect x="850" y="300" width="90" height="22" rx="11" fill="#233958"/>
+  <text x="120" y="805" fill="#E6F0FF" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="700">CameraHub TH</text>
+  <text x="120" y="852" fill="#6E89A8" font-family="Segoe UI, Arial, sans-serif" font-size="28">Digital Camera Collection</text>
+</svg>

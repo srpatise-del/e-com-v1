@@ -1,0 +1,12 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#0D1512"/>
+  <rect x="120" y="240" width="960" height="450" rx="54" fill="#24312A" stroke="#9CA37D" stroke-width="8"/>
+  <rect x="210" y="185" width="215" height="95" rx="28" fill="#5D5A48"/>
+  <circle cx="610" cy="465" r="176" fill="#60624E" stroke="#E4D8A8" stroke-width="16"/>
+  <circle cx="610" cy="465" r="114" fill="#1A231E" stroke="#F8F2D0" stroke-width="10"/>
+  <circle cx="610" cy="465" r="52" fill="#D1B266" fill-opacity="0.6"/>
+  <rect x="833" y="296" width="145" height="22" rx="11" fill="#515740"/>
+  <rect x="833" y="336" width="112" height="22" rx="11" fill="#515740"/>
+  <text x="120" y="800" fill="#FFF8E7" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="700">RETRO MIRRORLESS</text>
+  <text x="120" y="847" fill="#E4D8A8" font-family="Segoe UI, Arial, sans-serif" font-size="28">Classic design / modern imaging</text>
+</svg>
