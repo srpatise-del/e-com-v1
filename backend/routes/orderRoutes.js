@@ -1,5 +1,5 @@
 import express from "express";
-import { createOrder, getOrderById, getOrders, updateOrder, uploadSlipFile } from "../controllers/orderController.js";
+import { createOrder, deleteOrder, getOrderById, getOrders, updateOrder, uploadSlipFile } from "../controllers/orderController.js";
 import { adminOnly, protect } from "../middleware/authMiddleware.js";
 import uploadSlip from "../middleware/uploadMiddleware.js";
 
@@ -11,5 +11,6 @@ router.post("/", createOrder);
 router.get("/", getOrders);
 router.get("/:id", getOrderById);
 router.put("/:id", adminOnly, updateOrder);
+router.delete("/:id", adminOnly, deleteOrder);
 
 export default router;

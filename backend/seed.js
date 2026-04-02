@@ -177,13 +177,14 @@ const seed = async () => {
     await Promise.all([User.deleteMany(), Product.deleteMany(), Order.deleteMany(), Cart.deleteMany()]);
 
     // ผู้ใช้ตัวอย่างสำหรับทดสอบทั้งบทบาท admin และ user
-    const hashedPassword = await bcrypt.hash("123456", 10);
+    const adminPasswordHash = await bcrypt.hash("admin", 10);
+    const userPasswordHash = await bcrypt.hash("123456", 10);
 
     const [adminUser, normalUser] = await User.create([
       {
         name: "ผู้ดูแลระบบ",
-        email: "admin@camerahubth.com",
-        password: hashedPassword,
+        email: "admin@1.com",
+        password: adminPasswordHash,
         role: "admin",
         address: "กรุงเทพมหานคร",
         phone: "0800000000"
@@ -191,7 +192,7 @@ const seed = async () => {
       {
         name: "ลูกค้าทดลอง",
         email: "user@camerahubth.com",
-        password: hashedPassword,
+        password: userPasswordHash,
         role: "user",
         address: "เชียงใหม่",
         phone: "0900000000"
@@ -217,7 +218,7 @@ const seed = async () => {
     });
 
     console.log("Seed data inserted successfully");
-    console.log("Admin login: admin@camerahubth.com / 123456");
+    console.log("Admin login: admin@1.com / admin");
     console.log("User login: user@camerahubth.com / 123456");
     console.log(`Admin user created: ${adminUser.email}`);
     process.exit(0);

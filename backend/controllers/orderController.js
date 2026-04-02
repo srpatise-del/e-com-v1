@@ -109,3 +109,17 @@ export const updateOrder = async (req, res) => {
     res.status(500).json({ message: "ไม่สามารถอัปเดตคำสั่งซื้อได้", error: error.message });
   }
 };
+
+export const deleteOrder = async (req, res) => {
+  try {
+    const order = await Order.findByIdAndDelete(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({ message: "ไม่พบคำสั่งซื้อ" });
+    }
+
+    res.json({ message: "ลบคำสั่งซื้อสำเร็จ" });
+  } catch (error) {
+    res.status(500).json({ message: "ไม่สามารถลบคำสั่งซื้อได้", error: error.message });
+  }
+};
