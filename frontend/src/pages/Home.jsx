@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import CategoryCard from "../components/CategoryCard";
 import api from "../services/api";
@@ -49,12 +50,12 @@ export default function Home() {
                 สำหรับมือใหม่จนถึงมืออาชีพ
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <a href="/products" className="btn-primary">
+                <Link to="/products" className="btn-primary">
                   ช้อปสินค้าทั้งหมด
-                </a>
-                <a href="/products?category=Mirrorless" className="btn-secondary">
+                </Link>
+                <Link to="/products?category=Mirrorless" className="btn-secondary">
                   ดูกล้อง Mirrorless
-                </a>
+                </Link>
               </div>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
