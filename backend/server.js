@@ -18,7 +18,7 @@ const app = express();
 // อนุญาต frontend dev server เรียกใช้งาน API ได้โดยตรง
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+    origin: ["https://e-com-camera.vercel.app", "https://e-com-camera.vercel.app"],
     credentials: true
   })
 );

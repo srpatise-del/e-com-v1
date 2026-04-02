@@ -222,7 +222,7 @@ export default function AdminDashboard() {
                     )}
                     {order.paymentDetails?.slipUrl && (
                       <a
-                        href={`http://localhost:5050${order.paymentDetails.slipUrl}`}
+                        href={`https://e-com-v1-bvn8.onrender.com${order.paymentDetails.slipUrl}`}
                         target="_blank"
                         rel="noreferrer"
                         className="mt-2 inline-block text-sm text-brand-200 underline"
