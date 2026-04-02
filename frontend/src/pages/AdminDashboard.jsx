@@ -26,13 +26,10 @@ export default function AdminDashboard() {
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState(emptyProduct);
   const [savingOrderId, setSavingOrderId] = useState(null);
+  const [dashboardError, setDashboardError] = useState("");
 
   const loadDashboard = async () => {
-    const [productRes, orderRes, userRes] = await Promise.all([
-      api.get("/products"),
-      api.get("/orders"),
-      api.get("/auth/users")
-    ]);
+    const [productRes, orderRes, userRes] = await Promise.all([api.get("/products"), api.get("/orders"), api.get("/auth/users")]);
 
     setProducts(productRes.data.products || []);
     setOrders(orderRes.data.orders || []);
@@ -120,11 +117,14 @@ export default function AdminDashboard() {
       return;
     }
 
+    setDashboardError("");
     setSavingOrderId(orderId);
 
     try {
       await api.delete(`/orders/${orderId}`);
-      await loadDashboard();
+      setOrders((currentOrders) => currentOrders.filter((order) => order._id !== orderId));
+    } catch (error) {
+      setDashboardError(error.response?.data?.message || "ลบคำสั่งซื้อไม่สำเร็จ");
     } finally {
       setSavingOrderId(null);
     }
@@ -249,6 +249,7 @@ export default function AdminDashboard() {
           {activeTab === "orders" && (
             <div className="rounded-[2rem] border border-white/10 bg-card p-6">
               <h2 className="text-xl font-semibold text-white">คำสั่งซื้อทั้งหมด</h2>
+              {dashboardError && <p className="mt-4 text-sm text-rose-300">{dashboardError}</p>}
               <div className="mt-6 space-y-4">
                 {orders.map((order) => (
                   <div key={order._id} className="rounded-2xl border border-white/10 p-4">
