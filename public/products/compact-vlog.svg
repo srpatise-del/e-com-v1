@@ -1,0 +1,13 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#0E1120"/>
+  <circle cx="1020" cy="170" r="210" fill="#3B2A8A"/>
+  <rect x="190" y="280" width="820" height="340" rx="52" fill="#191E32" stroke="#A78BFA" stroke-width="8"/>
+  <circle cx="600" cy="450" r="145" fill="#2B2754" stroke="#DDD6FE" stroke-width="16"/>
+  <circle cx="600" cy="450" r="90" fill="#0A0D19" stroke="#F5F3FF" stroke-width="10"/>
+  <circle cx="600" cy="450" r="42" fill="#8B5CF6" fill-opacity="0.65"/>
+  <rect x="300" y="338" width="88" height="24" rx="12" fill="#43367D"/>
+  <rect x="812" y="340" width="82" height="24" rx="12" fill="#43367D"/>
+  <rect x="812" y="378" width="126" height="24" rx="12" fill="#43367D"/>
+  <text x="192" y="775" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="56" font-weight="700">COMPACT VLOG</text>
+  <text x="192" y="821" fill="#C4B5FD" font-family="Segoe UI, Arial, sans-serif" font-size="28">Pocket camera / fast everyday creator setup</text>
+</svg>

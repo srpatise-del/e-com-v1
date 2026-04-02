@@ -1,0 +1,14 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#07111E"/>
+  <circle cx="170" cy="130" r="220" fill="#0F3158"/>
+  <circle cx="1030" cy="780" r="260" fill="#0B2340"/>
+  <rect x="120" y="225" width="960" height="480" rx="54" fill="#101C31" stroke="#3B82F6" stroke-width="8"/>
+  <rect x="235" y="185" width="220" height="88" rx="28" fill="#15253F"/>
+  <circle cx="620" cy="465" r="180" fill="#132742" stroke="#7FB2FF" stroke-width="16"/>
+  <circle cx="620" cy="465" r="114" fill="#0A1321" stroke="#D8E9FF" stroke-width="10"/>
+  <circle cx="620" cy="465" r="56" fill="#1D6FFF" fill-opacity="0.65"/>
+  <rect x="830" y="285" width="168" height="24" rx="12" fill="#21395D"/>
+  <rect x="830" y="327" width="116" height="24" rx="12" fill="#21395D"/>
+  <text x="126" y="800" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="56" font-weight="700">SONY MIRRORLESS</text>
+  <text x="126" y="846" fill="#B8D7FF" font-family="Segoe UI, Arial, sans-serif" font-size="28">Hybrid full-frame / APS-C camera</text>
+</svg>
